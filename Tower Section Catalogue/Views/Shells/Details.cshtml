@@ -1,0 +1,54 @@
+﻿@model Tower_Section_Catalogue.Models.Shell
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Shell</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BottomDiameter)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BottomDiameter)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TopDiameter)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TopDiameter)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Thickness)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Thickness)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SteelDensity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SteelDensity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TowerSection)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TowerSection.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ShellPosition">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

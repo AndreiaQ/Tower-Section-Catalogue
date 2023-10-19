@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Tower_Section_Catalogue.Models.Shell>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BottomDiameter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TopDiameter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thickness)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SteelDensity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TowerSection)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BottomDiameter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TopDiameter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thickness)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SteelDensity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TowerSection.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ShellPosition">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ShellPosition">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ShellPosition">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
