@@ -39,8 +39,8 @@
                 <span asp-validation-for="SteelDensity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TowerSectionId" class="control-label"></label>
-                <select asp-for="TowerSectionId" class="form-control" asp-items="ViewBag.TowerSectionId"></select>
+
+                <input asp-for="TowerSectionId" class="form-control" type="hidden" />
                 <span asp-validation-for="TowerSectionId" class="text-danger"></span>
             </div>
             <div class="form-group">

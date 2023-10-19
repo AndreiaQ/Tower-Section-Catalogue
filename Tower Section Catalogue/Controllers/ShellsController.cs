@@ -122,6 +122,25 @@ namespace Tower_Section_Catalogue.Controllers
                 return NotFound();
             }
 
+            // Check if this is the first shell in the section, so no diameter continuity constraint applies.
+            var isFirstShell = !_context.Shell.Any(s => s.TowerSectionId == shell.TowerSectionId);
+
+            if (!isFirstShell)
+            {
+                // Find the previous shell in the same section with the highest ShellPosition.
+                var previousShell = _context.Shell
+                    .Where(s => s.TowerSectionId == shell.TowerSectionId && s.ShellPosition < shell.ShellPosition)
+                    .OrderByDescending(s => s.ShellPosition)
+                    .FirstOrDefault();
+
+                if (previousShell != null && previousShell.TopDiameter != shell.BottomDiameter)
+                {
+                    ModelState.AddModelError("BottomDiameter", "The bottom diameter of this shell must match the top diameter of the previous shell.");
+                    ViewData["TowerSectionId"] = new SelectList(_context.Set<TowerSection>(), "Id", "Id", shell.TowerSectionId);
+                    return View(shell);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -142,6 +161,7 @@ namespace Tower_Section_Catalogue.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["TowerSectionId"] = new SelectList(_context.Set<TowerSection>(), "Id", "Id", shell.TowerSectionId);
             return View(shell);
         }
