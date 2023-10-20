@@ -209,23 +209,25 @@ namespace Tower_Section_Catalogue.Controllers
           return (_context.Shell?.Any(e => e.ShellPosition == id)).GetValueOrDefault();
         }
 
-        public async Task<IActionResult> RetrieveByPartNumber([FromQuery] string partNumber)
+        public async Task<IActionResult> RetrieveByPartNumber(string partNumber)
         {
-            if (string.IsNullOrEmpty(partNumber))
+            // Query the TowerSections based on the provided partNumber.
+            var query = _context.TowerSection.AsQueryable(); // Start with an IQueryable
+
+            if (!string.IsNullOrEmpty(partNumber))
             {
-                return BadRequest("Part number cannot be empty.");
+                query = query.Where(ts => ts.partNumber == partNumber);
             }
 
-            var towerSection = await _context.TowerSection
-                .Include(ts => ts.Shells) // Include related shells
-                .FirstOrDefaultAsync(ts => ts.partNumber == partNumber);
+            // Materialize the query by calling ToListAsync() to execute it and retrieve the data.
+            var matchingTowerSections = await query.Include(ts => ts.Shells).ToListAsync();
 
-            if (towerSection == null)
+            if (matchingTowerSections.Count == 0)
             {
-                return NotFound($"Tower section with part number '{partNumber}' not found.");
+                return NotFound($"No tower sections match the specified part number: '{partNumber}'.");
             }
 
-            return View("RetrieveByPartNumber", towerSection); // You can create a "Details" view to display detailed information.
+            return View("RetrieveByPartNumber", matchingTowerSections);
         }
 
         public async Task<IActionResult> RetrieveByDiameters(double? bottomDiameter, double? topDiameter)
