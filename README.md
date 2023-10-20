@@ -7,7 +7,11 @@ The Tower Sections Catalogue is a web application designed to manage tower secti
 
 
 **Note:**
-Should be initialized by *https://localhost:7159/Shells/Index*
+To start running the web app just click the run button
+
+![Captura de ecrã 2023-10-20 193757](https://github.com/AndreiaQ/Tower-Section-Catalogue/assets/81645069/8a1723ed-acac-4986-9970-c0bb216e0b24)
+
+
 
 ### Functionalities:
 1. **Add a Tower Section** - Users can add a new tower section to the catalogue by providing the necessary information for each shell within the section;
