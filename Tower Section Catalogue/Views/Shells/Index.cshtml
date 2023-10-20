@@ -1,35 +1,36 @@
 ﻿@model IEnumerable<Tower_Section_Catalogue.Models.Shell>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="~/css/Index.css" rel="stylesheet"/>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Welcome!</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-    <a asp-action="RetrieveByPartNumber">Search</a>
-</p>
-<table class="table" id="myTable">
+<h2> This are the shells available</h2>
+
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Height)
+            <th scope ="col">
+                Height 
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BottomDiameter)
+            <th scope="col">
+                Bottom Diameter
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TopDiameter)
+            <th scope="col">
+                Top Diameter
+            </th >
+            <th scope="col">
+                Thickness 
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Thickness)
+            <th scope="col">
+                Steel Density 
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SteelDensity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TowerSection)
+            <th scope="col">
+                Tower Section 
             </th>
             <th></th>
         </tr>
@@ -37,6 +38,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Height)
             </td>
@@ -56,11 +58,19 @@
                 @Html.DisplayFor(modelItem => item.TowerSection.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ShellPosition">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ShellPosition">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ShellPosition">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ShellPosition" class="btn btn-secondary">Edit</a> 
+                    <a asp-action="Delete" asp-route-id="@item.ShellPosition" class="btn btn-secondary">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<p>
+    <div class="buttons">
+        <a asp-action="Create" class=" btn btn-primary">Add Tower Section</a>
+        <a asp-action="RetrieveByPartNumber" class=" btn btn-primary">Search by Part Number</a>
+        <a asp-action="RetrieveByDiameters" class=" btn btn-primary">Search by Diameters</a>
+    </div>
+
+</p>
