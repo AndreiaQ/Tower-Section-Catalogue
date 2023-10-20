@@ -228,6 +228,33 @@ namespace Tower_Section_Catalogue.Controllers
             return View("RetrieveByPartNumber", towerSection); // You can create a "Details" view to display detailed information.
         }
 
+        public async Task<IActionResult> RetrieveByDiameters(double? bottomDiameter, double? topDiameter)
+        {
+            // Query the TowerSections based on the provided bottomDiameter and/or topDiameter.
+            var query = _context.TowerSection.AsQueryable(); // Start with an IQueryable
+
+            if (bottomDiameter.HasValue)
+            {
+                query = query.Where(ts => ts.bottomDiameter >= bottomDiameter.Value);
+            }
+
+            if (topDiameter.HasValue)
+            {
+                query = query.Where(ts => ts.topDiameter <= topDiameter.Value);
+            }
+
+            // Materialize the query by calling ToListAsync() to execute it and retrieve the data.
+            var matchingTowerSections = await query.Include(ts => ts.Shells).ToListAsync();
+
+            if (matchingTowerSections.Count == 0)
+            {
+                return NotFound("No tower sections match the specified criteria.");
+            }
+
+            return View("RetrieveByDiameters", matchingTowerSections);
+        }
+
+
     }
 
 }
