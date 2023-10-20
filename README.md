@@ -1,8 +1,7 @@
 
 Exercise from Vestas
 
-## H2 The Tower Sections Catalogue is a web application designed to manage tower sections and their corresponding shells. 
-## H2 In this application, towers are constructed by stacking sections, each consisting of a series of cylindrical or conical steel shells assembled vertically.
+## H2 The Tower Sections Catalogue is a web application designed to manage tower sections and their corresponding shells. In this application, towers are constructed by stacking sections, each consisting of a series of cylindrical or conical steel shells assembled vertically.
 
 Features:
 
