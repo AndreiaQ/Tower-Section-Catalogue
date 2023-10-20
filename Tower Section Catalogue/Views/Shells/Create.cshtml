@@ -1,15 +1,16 @@
 ﻿@model Tower_Section_Catalogue.Models.Shell
+<link  href="~/css/forms.css" rel="stylesheet"/>
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Add new tower section </h1>
 
-<h4>Shell</h4>
+<h4> Add the information of the shell </h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 form-container">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -18,38 +19,43 @@
                 <span asp-validation-for="Height" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BottomDiameter" class="control-label"></label>
+                <label asp-for="BottomDiameter" class="control-label">Bottom Diameter</label>
                 <input asp-for="BottomDiameter" class="form-control" />
                 <span asp-validation-for="BottomDiameter" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TopDiameter" class="control-label"></label>
+                <label asp-for="TopDiameter" class="control-label">Top Diameter</label>
                 <input asp-for="TopDiameter" class="form-control" />
                 <span asp-validation-for="TopDiameter" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Thickness" class="control-label"></label>
+                <label asp-for="Thickness" class="control-label">Thickness</label>
                 <input asp-for="Thickness" class="form-control" />
                 <span asp-validation-for="Thickness" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SteelDensity" class="control-label"></label>
+                <label asp-for="SteelDensity" class="control-label">Steel Density</label>
                 <input asp-for="SteelDensity" class="form-control" />
                 <span asp-validation-for="SteelDensity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TowerSectionId" class="control-label"></label>
+                <label asp-for="TowerSectionId" class="control-label">Tower Section</label>
                 <select asp-for="TowerSectionId" class ="form-control" asp-items="ViewBag.TowerSectionId"></select>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group" >
+                <input type="submit" value="Add" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
+        Back to List
+    </a>
 </div>
 
 @section Scripts {

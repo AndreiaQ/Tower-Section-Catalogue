@@ -1,17 +1,26 @@
 ﻿@model List<Tower_Section_Catalogue.Models.TowerSection>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 @{
     ViewData["Title"] = "Retrieve Tower Sections";
+    <link href="~/css/PartNumber.css" rel="stylesheet" />
+   
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<form method="get" action="@Url.Action("RetrieveByPartNumber")">
+<form method="get" action="@Url.Action("RetrieveByPartNumber")" class="custom-form">
     <div class="form-group">
         <label for="partNumber">Part Number:</label>
-        <input type="text" name="partNumber" class="form-control" value="@ViewBag.PartNumber" />
+        <input type="text" name="partNumber" class="form-control input-sm" value="@ViewBag.PartNumber" />
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg>
+        Search
+    </button>
 </form>
 
 @if (Model.Count == 0)
@@ -20,7 +29,7 @@
 }
 else
 {
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Part Number</th>
@@ -31,30 +40,42 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var towerSection in Model)
+          @foreach (var towerSection in Model)
+{
+    <tr>
+        <td>@towerSection.partNumber</td>
+        <td>@towerSection.bottomDiameter</td>
+        <td>@towerSection.topDiameter</td>
+        <td>@towerSection.lenght</td>
+        
+        <td>
+            @if (towerSection.Shells != null && towerSection.Shells.Count > 0)
             {
-                <tr>
-                    <td>@towerSection.partNumber</td>
-                    <td>@towerSection.bottomDiameter</td>
-                    <td>@towerSection.topDiameter</td>
-                    
-                    <td>
-                        @if (towerSection.Shells != null && towerSection.Shells.Count > 0)
-                        {
-                            <ul>
+                <ul>
                                 @foreach (var shell in towerSection.Shells)
                                 {
                                     <li>Shell: Bottom Diameter - @shell.BottomDiameter, Top Diameter - @shell.TopDiameter</li>
+                                    <a asp-action="Details" asp-route-id="@shell.ShellPosition" class="btn btn-secondary">Details</a>
+                                  
                                 }
-                            </ul>
-                        }
-                        else
-                        {
-                            <p>No shells available.</p>
-                        }
-                    </td>
-                </tr>
+                    
+                </ul>
             }
+            else
+            {
+                <p>No shells available.</p>
+            }
+        </td>
+    </tr>
+}
+
         </tbody>
     </table>
+
+    <a asp-action="Index" class="btn btn-secondary back-list">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
+        Back to List
+    </a>
 }

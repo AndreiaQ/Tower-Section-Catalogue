@@ -1,0 +1,58 @@
+﻿body {
+    font-family: 'Playfair Display';
+    background-color: #f9f9f9;
+}
+h1{
+    text-align:center;
+}
+
+
+.form-group label{
+    font-size:19px;
+}
+
+.input-sm {
+    width: 250px; /* Defina a largura desejada */
+    height: 35px; /* Defina a altura desejada */
+    font-size: 14px; /* Defina o tamanho da fonte desejado */
+    padding: 5px; /* Ajuste o preenchimento conforme necessário */
+    /* Outros estilos personalizados, se necessário */
+}
+
+.custom-form {
+    display: flex;
+    align-items: center;
+}
+
+    .custom-form .form-group {
+        margin-right: 10px; 
+        margin-top:10px;
+    }
+
+.table{
+    margin-top:30px;
+}
+
+.btn-primary {
+    margin-top: 35px;
+    background-color: #5898c7;
+    border-color: #5898c7;
+}
+
+.btn-secondary {
+    margin-left: 70%;
+    margin-top: -10%;
+    background-color: #adadad;
+    border-color: #adadad;
+}
+
+li{
+    list-style:circle;
+    padding:10px 0;
+}
+
+.back-list{
+    margin-top:1%;
+    margin-left:0;
+    background-color:#727070;
+}

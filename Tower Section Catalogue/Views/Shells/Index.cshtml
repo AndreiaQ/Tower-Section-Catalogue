@@ -58,8 +58,10 @@
                 @Html.DisplayFor(modelItem => item.TowerSection.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ShellPosition" class="btn btn-secondary">Edit</a> 
+                    <a asp-action="Create" class=" btn btn-secondary">Add</a>
+                     <a asp-action="Edit" asp-route-id="@item.ShellPosition" class="btn btn-secondary">Edit</a> 
                     <a asp-action="Delete" asp-route-id="@item.ShellPosition" class="btn btn-secondary">Delete</a>
+                 
             </td>
         </tr>
 }
@@ -68,7 +70,7 @@
 
 <p>
     <div class="buttons">
-        <a asp-action="Create" class=" btn btn-primary">Add Tower Section</a>
+   
         <a asp-action="RetrieveByPartNumber" class=" btn btn-primary">Search by Part Number</a>
         <a asp-action="RetrieveByDiameters" class=" btn btn-primary">Search by Diameters</a>
     </div>

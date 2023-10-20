@@ -1,4 +1,6 @@
 ﻿@model Tower_Section_Catalogue.Models.Shell
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link  href="~/css/Delete.css" rel="stylesheet">
 
 @{
     ViewData["Title"] = "Delete";
@@ -6,52 +8,103 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this shell?</h3>
 <div>
-    <h4>Shell</h4>
+ 
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Height)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Height)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BottomDiameter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BottomDiameter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TopDiameter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TopDiameter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Thickness)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Thickness)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SteelDensity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SteelDensity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TowerSection)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TowerSection.Id)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-md-8 form-container">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="Height" class="control-label">Height</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @Model.Height
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="BottomDiameter" class="control-label">Bottom Diameter</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @Model.BottomDiameter
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="TopDiameter" class="control-label">Top Diameter</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @Model.TopDiameter
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="Thickness" class="control-label">Thickness</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class form-group">
+                                @Model.Thickness
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="SteelDensity" class="control-label">Steel Density</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @Model.SteelDensity
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label asp-for="TowerSectionId" class="control-label">Tower Section</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @Model.TowerSectionId
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ShellPosition" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
     </form>
+    <a asp-action="Index" class="btn btn-secondary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"></path>
+        </svg>
+        Back to List
+    </a>
 </div>
