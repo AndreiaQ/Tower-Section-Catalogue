@@ -208,5 +208,27 @@ namespace Tower_Section_Catalogue.Controllers
         {
           return (_context.Shell?.Any(e => e.ShellPosition == id)).GetValueOrDefault();
         }
+
+        public async Task<IActionResult> RetrieveByPartNumber([FromQuery] string partNumber)
+        {
+            if (string.IsNullOrEmpty(partNumber))
+            {
+                return BadRequest("Part number cannot be empty.");
+            }
+
+            var towerSection = await _context.TowerSection
+                .Include(ts => ts.Shells) // Include related shells
+                .FirstOrDefaultAsync(ts => ts.partNumber == partNumber);
+
+            if (towerSection == null)
+            {
+                return NotFound($"Tower section with part number '{partNumber}' not found.");
+            }
+
+            return View("RetrieveByPartNumber", towerSection); // You can create a "Details" view to display detailed information.
+        }
+
     }
+
 }
+

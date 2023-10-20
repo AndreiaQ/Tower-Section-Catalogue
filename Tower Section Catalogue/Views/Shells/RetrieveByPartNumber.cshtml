@@ -1,0 +1,46 @@
+﻿@model Tower_Section_Catalogue.Models.TowerSection
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details for Tower Section: @Model.partNumber</h1>
+
+<div>
+    <h4>Part Number: @Model.partNumber</h4>
+    <p>Bottom Diameter: @Model.bottomDiameter</p>
+    <p>Top Diameter: @Model.topDiameter</p>
+    
+</div>
+
+<h4>Shells</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Shell Position</th>
+            <th>Height</th>
+            <th>Bottom Diameter</th>
+            <th>Top Diameter</th>
+            <th>Thickness</th>
+            <th>Steel Density</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var shell in Model.Shells)
+        {
+            <tr>
+                <td>@shell.ShellPosition</td>
+                <td>@shell.Height</td>
+                <td>@shell.BottomDiameter</td>
+                <td>@shell.TopDiameter</td>
+                <td>@shell.Thickness</td>
+                <td>@shell.SteelDensity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
