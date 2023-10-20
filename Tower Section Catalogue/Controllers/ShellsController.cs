@@ -62,36 +62,42 @@ namespace Tower_Section_Catalogue.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Check if this is the first shell in the section, so no diameter continuity constraint applies.
-                var isFirstShell = !_context.Shell.Any(s => s.TowerSectionId == shell.TowerSectionId);
-
-                if (!isFirstShell)
+                if (shell.Height <= 0 || shell.BottomDiameter <= 0 || shell.TopDiameter <= 0 || shell.Thickness <= 0 || shell.SteelDensity <= 0)
                 {
-                    // Find the previous shell in the same section with the highest ShellPosition.
-                    var previousShell = _context.Shell
-                        .Where(s => s.TowerSectionId == shell.TowerSectionId)
-                        .OrderByDescending(s => s.ShellPosition)
-                        .FirstOrDefault();
+                    ModelState.AddModelError(string.Empty, "All properties must be greater than zero.");
+                }
+                else
+                {
+                    // Check if this is the first shell in the section, so no diameter continuity constraint applies.
+                    var isFirstShell = !_context.Shell.Any(s => s.TowerSectionId == shell.TowerSectionId);
 
-                    if (previousShell != null && previousShell.TopDiameter != shell.BottomDiameter)
+                    if (!isFirstShell)
                     {
-                        // If the constraint is not met, add a model error.
-                        ModelState.AddModelError("BottomDiameter", "The bottom diameter of this shell must match the top diameter of the previous shell.");
-                        ViewData["TowerSectionId"] = new SelectList(_context.Set<TowerSection>(), "Id", "Id", shell.TowerSectionId);
-                        return View(shell);
+                        var previousShell = _context.Shell
+                            .Where(s => s.TowerSectionId == shell.TowerSectionId)
+                            .OrderByDescending(s => s.ShellPosition)
+                            .FirstOrDefault();
+
+                        if (previousShell != null && previousShell.TopDiameter != shell.BottomDiameter)
+                        {
+                            ModelState.AddModelError("BottomDiameter", "The bottom diameter of this shell must match the top diameter of the previous shell.");
+                        }
                     }
                 }
 
-                // If all constraints are met, add the shell to the context and save it to the database.
-                _context.Add(shell);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.ErrorCount == 0)
+                {
+                    _context.Add(shell);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
 
-            // If ModelState is not valid, return to the view with the errors.
             ViewData["TowerSectionId"] = new SelectList(_context.Set<TowerSection>(), "Id", "Id", shell.TowerSectionId);
             return View(shell);
         }
+
+
 
         // GET: Shells/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -122,12 +128,17 @@ namespace Tower_Section_Catalogue.Controllers
                 return NotFound();
             }
 
+            // Check if any property is less than or equal to zero.
+            if (shell.Height <= 0 || shell.BottomDiameter <= 0 || shell.TopDiameter <= 0 || shell.Thickness <= 0 || shell.SteelDensity <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "All properties must be greater than zero.");
+            }
+
             // Check if this is the first shell in the section, so no diameter continuity constraint applies.
             var isFirstShell = !_context.Shell.Any(s => s.TowerSectionId == shell.TowerSectionId);
 
             if (!isFirstShell)
             {
-                // Find the previous shell in the same section with the highest ShellPosition.
                 var previousShell = _context.Shell
                     .Where(s => s.TowerSectionId == shell.TowerSectionId && s.ShellPosition < shell.ShellPosition)
                     .OrderByDescending(s => s.ShellPosition)
@@ -136,8 +147,6 @@ namespace Tower_Section_Catalogue.Controllers
                 if (previousShell != null && previousShell.TopDiameter != shell.BottomDiameter)
                 {
                     ModelState.AddModelError("BottomDiameter", "The bottom diameter of this shell must match the top diameter of the previous shell.");
-                    ViewData["TowerSectionId"] = new SelectList(_context.Set<TowerSection>(), "Id", "Id", shell.TowerSectionId);
-                    return View(shell);
                 }
             }
 
@@ -165,6 +174,7 @@ namespace Tower_Section_Catalogue.Controllers
             ViewData["TowerSectionId"] = new SelectList(_context.Set<TowerSection>(), "Id", "Id", shell.TowerSectionId);
             return View(shell);
         }
+
 
         // GET: Shells/Delete/5
         public async Task<IActionResult> Delete(int? id)

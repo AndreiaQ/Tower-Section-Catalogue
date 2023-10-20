@@ -6,6 +6,7 @@ namespace Tower_Section_Catalogue.Models
     {
         [Key]
 
+ 
         public int ShellPosition { get; set; }
         public double Height { get; set; }
         public double BottomDiameter { get; set; }

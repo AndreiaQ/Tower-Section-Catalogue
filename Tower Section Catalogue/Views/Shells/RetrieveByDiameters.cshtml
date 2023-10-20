@@ -29,9 +29,10 @@ else
     <table class="table  table-bordered">
         <thead>
             <tr>
-                <th>Part Number</th>
+               
                 <th>Bottom Diameter</th>
                 <th>Top Diameter</th>
+                <th>Part Number</th>
                 <th>Length</th>
                 <th>Shells</th>
             </tr>
@@ -40,9 +41,9 @@ else
             @foreach (var towerSection in Model)
             {
                 <tr>
-                    <td>@towerSection.partNumber</td>
                     <td>@towerSection.bottomDiameter</td>
                     <td>@towerSection.topDiameter</td>
+                    <td>@towerSection.partNumber</td>
                     <td>@towerSection.lenght</td>
                     
               
